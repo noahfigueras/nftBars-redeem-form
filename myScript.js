@@ -52,17 +52,6 @@ async function populateForm() {
 				</div>
 			</label>
 		</li>`);
-/*
-		const input = document.createElement("input");
-		const label = document.createElement("label");
-    input.setAttribute("type", "checkbox");
-    input.setAttribute("name", `nft${value}`);
-    input.setAttribute("value", value);
-		label.setAttribute("for", `nft${value}`);
-		label.innerHTML = `Nft with id ${value}`;
-		form.append(input);
-		form.append(label);
-*/
 	}
 }
 
