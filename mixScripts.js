@@ -300,6 +300,7 @@ async function populateForm() {
 	const input = document.createElement("input");
 	input.setAttribute("type", "hidden");
 	input.setAttribute("value", addr);
+	input.setAttribute("data-name", "Wallet");
 	form.append(input);
 	// Populate user owned nfts 
 	for(let value of tokens) {
