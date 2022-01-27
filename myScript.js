@@ -4,15 +4,15 @@ const contractAbi = [
   "function balanceOf(address) view returns (uint)",
 	"function tokenOfOwnerByIndex(address, uint) view returns (uint)"
 ];
-let provider;
 let signer;
 let contract;
+console.log('Provider', provider);
 
 // Initialize Metamask provider
 function init() {
-  provider = new ethers.providers.Web3Provider(window.ethereum)
-  signer = provider.getSigner()
-	contract = new ethers.Contract(address, contractAbi, provider);
+  const Provider = new ethers.providers.Web3Provider(window.ethereum)
+  signer = Provider.getSigner()
+	contract = new ethers.Contract(address, contractAbi, Provider);
 }
 
 // Get token ids of user
