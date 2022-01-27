@@ -227,6 +227,8 @@ async function onConnect() {
 
   await refreshAccountData();
   await amountLeft();
+  init_nft_contract();
+  populateForm();
 }
 
 /**
@@ -322,8 +324,6 @@ async function populateForm() {
  */
 window.addEventListener('load', async () => {
   init();
-  init_nft_contract();
-  populateForm();
   document.querySelector("#btn-connect").addEventListener("click", onConnect);
   document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
   document.querySelector("#btn-mint").addEventListener("click", mint);
