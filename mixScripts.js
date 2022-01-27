@@ -278,14 +278,14 @@ function init_nft_contract() {
 async function tokensToRedeem() {
 	try{
 		let tokenIds = [];
-		const addr = "0x5e079B2f1D98E07B4D53A5D0f6Ef5843235e8E15";// await signer.getAddress();
+		const addr = await signer.getAddress();
 		const balance = await contract.balanceOf(addr);
 		// Get tokenIds
 		for(let i = 0; i < Number(balance); i++) {
 			const id = await contract.tokenOfOwnerByIndex(addr,i);
 			tokenIds.push(String(id));
 		}	
-		return tokenIds;
+		return [tokenIds, addr];
 	} catch(err){
 		console.log(err);
 	}		
@@ -293,8 +293,7 @@ async function tokensToRedeem() {
 
 // Add tokenIds selection to form
 async function populateForm() {
-	const tokens = await tokensToRedeem();
-	const addr = "0x5e079B2f1D98E07B4D53A5D0f6Ef5843235e8E15";// await signer.getAddress();
+	const [tokens, addr] = await tokensToRedeem();
 	const ul = document.querySelector("#add-token");		
 	// Add address to form
 	const form = document.querySelector("#wf-form-BBars-NFT-Redemption-Form");		
