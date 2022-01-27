@@ -1,4 +1,3 @@
-const ethers = window.ethers;
 const address = '0x50aDB1d3fb9fa3cc2383560D09b5E08027cEBB24';
 const contractAbi = [
   "function balanceOf(address) view returns (uint)",
@@ -10,6 +9,7 @@ console.log('Provider', provider);
 
 // Initialize Metamask provider
 function init() {
+  const ethers = window.ethers;
   const Provider = new ethers.providers.Web3Provider(window.ethereum)
   signer = Provider.getSigner()
 	contract = new ethers.Contract(address, contractAbi, Provider);
