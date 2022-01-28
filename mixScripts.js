@@ -317,17 +317,13 @@ async function populateForm() {
 			<label id="token" class="w-checkbox checkbox-field-bars">
 				<div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox">
 				</div>
-				<input type="checkbox" name="Token-ID-${value}" id="Token-ID-${value}" data-name="Token ID ${value}" value="${value}" style="opacity:0;position:absolute;z-index:-1">
+				<input type="checkbox" name="Token-ID-${value}" id="Token-ID-${value}" data-name="Token ID ${value}" value="${value}" style="opacity:0;position:absolute;z-index:-1" ${isRedeemed ? "disabled" : "">
 				<span for="Token-ID-${value}" class="checkbox-label w-form-label">bitcoin bar<span class="label-small-span"><br>Token ID: ${value} ${isRedeemed ? " | Disabled - token already redeemed" : "" }</span></span>
 				<div class="logo-wrap">
 					<img src="${metadata.image}" loading="lazy" alt="" class="image-4" width="48">
 				</div>
 			</label>
 		</li>`);
-      // Disable redeemed tokens
-      if(isRedeemed) {
-      document.getElementById(`Token-ID-${value}`).disabled = true;
-     }
 	}
 }
 
