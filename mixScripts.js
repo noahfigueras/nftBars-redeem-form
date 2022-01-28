@@ -229,6 +229,10 @@ async function onConnect() {
   await amountLeft();
   init_nft_contract();
   populateForm();
+	
+  // Change UI elements
+  document.getElementsByClassName('connect-wallet-form-container')[0].style.display = 'none';
+  document.getElementsByClassName('modal-container redeem')[0].style.display ='none';
 }
 
 /**
@@ -253,6 +257,7 @@ async function onDisconnect() {
   selectedAccount = null;
 
   // Set the UI back to the initial state
+  document.getElementsByClassName('connect-wallet-form-container')[0].style.display = "block";
   document.querySelector("#prepare").style.display = "block";
   document.querySelector("#connected").style.display = "none";
 }
@@ -325,6 +330,7 @@ async function populateForm() {
 window.addEventListener('load', async () => {
   init();
   document.querySelector("#btn-connect").addEventListener("click", onConnect);
+  document.getElementsByClassName('connect-wallet-form-container')[0].addEventListener("click", onConnect);
   document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
   document.querySelector("#btn-mint").addEventListener("click", mint);
 });
