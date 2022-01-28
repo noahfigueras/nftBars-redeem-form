@@ -187,6 +187,8 @@ async function refreshAccountData() {
   // immediate hide this data
   document.querySelector("#connected").style.display = "none";
   document.querySelector("#prepare").style.display = "block";
+  document.getElementsByClassName('connect-wallet-form-container')[0].style.display = 'none';
+  document.getElementsByClassName('modal-container redeem')[0].style.display ='none';
 
   // Disable button while UI is loading.
   // fetchAccountData() will take a while as it communicates
@@ -229,10 +231,6 @@ async function onConnect() {
   await amountLeft();
   init_nft_contract();
   populateForm();
-	
-  // Change UI elements
-  document.getElementsByClassName('connect-wallet-form-container')[0].style.display = 'none';
-  document.getElementsByClassName('modal-container redeem')[0].style.display ='none';
 }
 
 /**
