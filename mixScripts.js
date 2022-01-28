@@ -267,6 +267,7 @@ const contractAbi = [
   "function balanceOf(address) view returns (uint)",
 	"function tokenOfOwnerByIndex(address, uint) view returns (uint)"
 ];
+const ipfs = 'https://ipfs.io/ipfs/QmPazLUH6dL8G47JCqePz75CWZNfD2EWmHYA17ucCdT6gN/';
 let signer;
 let contract;
 
@@ -307,18 +308,26 @@ async function populateForm() {
 	form.append(input);
 	// Populate user owned nfts 
 	for(let value of tokens) {
+	const link = ipfs + value;
+  	const response = await fetch(link);
+        const metadata = await response.json();
+        const isRedeemed = metadata.attributes[0].value === "No" ? false : true;
 	ul.insertAdjacentHTML('beforeend', `
 		<li class="token-list-item">
 			<label id="token" class="w-checkbox checkbox-field-bars">
 				<div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox">
 				</div>
-				<input type="checkbox" name="Token-ID-${value}" id="Token-ID-1" data-name="Token ID ${value}" value="${value}" style="opacity:0;position:absolute;z-index:-1">
-				<span for="Token-ID-${value}" class="checkbox-label w-form-label">bitcoin bar<span class="label-small-span"><br>Token ID: ${value}</span></span>
+				<input type="checkbox" name="Token-ID-${value}" id="Token-ID-${value}" data-name="Token ID ${value}" value="${value}" style="opacity:0;position:absolute;z-index:-1">
+				<span for="Token-ID-${value}" class="checkbox-label w-form-label">bitcoin bar<span class="label-small-span"><br>Token ID: ${value} ${isRedeemed ? " | Disabled - token already redeemed" : "" }</span></span>
 				<div class="logo-wrap">
-					<img src="https://uploads-ssl.webflow.com/60aeba699cbed144e00e4216/61ee2b09334fc99b8a382279_bar-sample%201.png" loading="lazy" alt="" class="image-4" width="48">
+					<img src="${metadata.image}" loading="lazy" alt="" class="image-4" width="48">
 				</div>
 			</label>
 		</li>`);
+      // Disable redeemed tokens
+      if(isRedeemed) {
+      document.getElementById(`Token-ID-${value}`).disabled = true;
+     }
 	}
 }
 
