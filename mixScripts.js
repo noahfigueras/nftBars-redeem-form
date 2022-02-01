@@ -330,10 +330,11 @@ async function populateForm() {
 	input.setAttribute("id", "address-field");
 	input.setAttribute("data-name", "Wallet");
 	form.append(input);
-	submit.addEventListener("submit", async () => {
+	submit.addEventListener("submit", async (e) => {
   	     const verified = await verifySignature();
   	     if(!verified){
   	       console.log("Incorrect Signature");
+		e.preventDefault();
   	       return false;
   	    }
            //form.submit();
