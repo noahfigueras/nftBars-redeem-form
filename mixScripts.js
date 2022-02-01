@@ -188,7 +188,6 @@ async function refreshAccountData() {
   document.querySelector("#connected").style.display = "none";
   document.querySelector("#prepare").style.display = "block";
   document.getElementsByClassName('connect-wallet-form-container')[0].style.display = 'none';
-  document.getElementsByClassName('modal-container redeem')[0].style.display ='none';
 
   // Disable button while UI is loading.
   // fetchAccountData() will take a while as it communicates
@@ -204,7 +203,10 @@ async function refreshAccountData() {
  */
 async function onConnect() {
 
+  //Hide UI form to display modal
   console.log("Opening a dialog", web3Modal);
+  document.getElementsByClassName('modal-container redeem')[0].style.display ='none';
+	
   try {
     provider = await web3Modal.connect();
   } catch(e) {
