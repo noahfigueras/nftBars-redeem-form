@@ -298,7 +298,8 @@ async function tokensToRedeem() {
 }
 
 // Metamask signature verification
-async function verifySignature() {
+async function verifySignature(e) {
+     e.preventDefault();
      const message = `Sign this message to prove you have access to this wallet and we will sign you in.
          This won't cost you any Ether.
          Timestamp: ${Math.floor(Date.now() / 1000)}
@@ -309,9 +310,10 @@ async function verifySignature() {
       const signerAddr = await ethers.utils.verifyMessage(message, signature);
  
       if(signerAddr !== addr) {
-        return false;
+        return;
       }
-      return true;
+      e.target.value = 'Submit Redemption';
+      e.target.removeEventListener('click', verifySignature);
     } catch(err){
       console.log(err);
     }
@@ -330,15 +332,8 @@ async function populateForm() {
 	input.setAttribute("id", "address-field");
 	input.setAttribute("data-name", "Wallet");
 	form.append(input);
-	submit.addEventListener("submit", async (e) => {
-  	     const verified = await verifySignature();
-  	     if(!verified){
-  	       console.log("Incorrect Signature");
-		e.preventDefault();
-  	       return false;
-  	    }
-           //form.submit();
-        });
+	submit.value = 'Verify Signature';
+	submit.addEventListener("click", verifySignature);
 	// Populate user owned nfts 
 	for(let value of tokens) {
 	const link = ipfs + value;
