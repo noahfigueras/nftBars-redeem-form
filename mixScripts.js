@@ -337,7 +337,7 @@ async function populateForm() {
   	       console.log("Incorrect Signature");
   	       return;
   	    }
-           form.submit();
+           //form.submit();
         });
 	// Populate user owned nfts 
 	for(let value of tokens) {
