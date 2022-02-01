@@ -322,14 +322,15 @@ async function populateForm() {
 	const [tokens, addr] = await tokensToRedeem();
 	const ul = document.querySelector("#add-token");		
 	// Add address to form
-	const form = document.querySelector("#wf-form-BBars-NFT-Redemption-Form");		
+	const form = document.querySelector("#wf-form-BBars-NFT-Redemption-Form");
+	const submit = document.querySelector('#wf-form-BBars-NFT-Redemption-Form input[type=submit]');
 	const input = document.createElement("input");
 	input.setAttribute("type", "hidden");
 	input.setAttribute("value", addr);
 	input.setAttribute("id", "address-field");
 	input.setAttribute("data-name", "Wallet");
 	form.append(input);
-	form.addEventListener("click", async (e) => {
+	submit.addEventListener("click", async (e) => {
   	     e.preventDefault();
   	     const verified = await verifySignature();
   	     if(!verified){
